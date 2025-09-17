@@ -21,11 +21,6 @@ var
 
 implementation
 
-procedure TForm4.ControlAction(Sender: TObject);
-begin
-//  FAppController.HandleControlAction(Sender);
-end;
-
 procedure TForm4.clearScreen;
 var
   I: Integer;

@@ -12,29 +12,12 @@ type
   private
     FAppController: TAppCOntroller;
   public
-    procedure clearScreen;
-    procedure ControlAction(Sender: TObject);
   end;
 
 var
   MainForm: TForm4;
 
 implementation
-
-procedure TForm4.ControlAction(Sender: TObject);
-begin
-//  FAppController.HandleControlAction(Sender);
-end;
-
-procedure TForm4.clearScreen;
-var
-  I: Integer;
-begin
-  for I := ControlCount - 1 downto 0 do
-  begin
-    Controls[I].Free;
-  end;
-end;
 
 procedure TForm4.FormCreate(Sender: TObject);
 begin

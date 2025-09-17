@@ -1,0 +1,20 @@
+unit AppController;
+
+interface
+
+uses
+  SysUtils, Classes, Forms;
+
+type
+  TAppController = class
+  private
+    // FMainForm: TForm4
+  public
+    procedure HandleControlAction(Sender: Tobject);
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure navigateTo(AScreenName: string) end;
+
+implementation
+
+end.

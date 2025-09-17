@@ -1,0 +1,29 @@
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TMain = class(TForm)
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMain;
+
+implementation
+
+procedure TMain.FormCreate(Sender: TObject);
+begin
+  ShowMessage('Hello world');
+end;
+{$R *.dfm}
+
+end.

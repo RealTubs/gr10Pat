@@ -13,18 +13,12 @@ type
     FAppController: TAppCOntroller;
   public
     procedure clearScreen;
-    procedure ControlAction(Sender: TObject);
   end;
 
 var
   MainForm: TForm4;
 
 implementation
-
-procedure TForm4.ControlAction(Sender: TObject);
-begin
-//  FAppController.HandleControlAction(Sender);
-end;
 
 procedure TForm4.clearScreen;
 var

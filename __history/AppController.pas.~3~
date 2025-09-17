@@ -1,0 +1,17 @@
+unit AppController;
+
+interface
+
+uses
+  SysUtils, Classes, Forms;
+
+type
+  TAppController = class
+  private
+//    FMainForm: TForm4
+  end;
+
+implementation
+
+end.
+

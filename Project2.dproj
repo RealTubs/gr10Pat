@@ -44,10 +44,10 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="Unit4.pas">
-				<Form>Form4</Form>
+				<Form> Form4 </Form>
 			</DCCReference>
-			<DCCReference Include="Unit5.pas"/>
-			<DCCReference Include="Unit6.pas"/>
+			<DCCReference Include="AppController.pas"/>
+			<DCCReference Include="ControlLoader.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

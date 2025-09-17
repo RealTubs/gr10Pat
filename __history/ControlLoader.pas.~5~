@@ -1,0 +1,30 @@
+unit ControlLoader;
+
+interface
+
+uses
+  SysUtils, Classes, Forms, UNit4, uLkJSON, AppController;
+
+type
+  TControlLoader = class
+  private
+    FControls: TlkJSONobject;
+    FController: TAppController;
+  public
+    constructor Create(Json: TlkJSONobject);
+    destructor Destroy; override;
+  end;
+
+implementation
+
+constructor TControlLoader.Create(Json: TlkJSONobject);
+begin
+  FControls := Json;
+end;
+
+destructor TControlLoader.Destroy;
+begin
+  inherited;
+end;
+
+end.

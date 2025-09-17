@@ -2,15 +2,15 @@ program Project2;
 
 uses
   Forms,
-  Unit4 in 'Unit4.pas' { Form4 } ,
+  Main in 'Main.Pas' {Form4},
   AppController in 'AppController.pas',
   ControlLoader in 'ControlLoader.pas';
+
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm4, MainForm);
+  Application.CreateForm(TMain, MainForm);
   Application.Run;
-
 end.

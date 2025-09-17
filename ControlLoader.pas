@@ -1,0 +1,40 @@
+unit ControlLoader;
+
+interface
+
+uses
+  SysUtils, Classes, Forms, uLkJSON, AppController, Graphics, Windows,
+  StdCtrls, ExtCtrls, Messages, Dialogs, Controls;
+
+type
+  TControlLoader = class
+  private
+    FControls: TlkJSONobject;
+    FController: TAppController;
+  public
+    constructor Create(Json: TlkJSONobject; AController: TAppController);
+    destructor Destroy; override;
+    procedure BuildScreen(AParent: TWinControl; AScreenName: string);
+  end;
+
+implementation
+
+constructor TControlLoader.Create(Json: TlkJSONobject;
+  AController: TAppController);
+begin
+  FControls := Json;
+  FController := AController;
+end;
+
+destructor TControlLoader.Destroy;
+begin
+  FControls.Free;
+  inherited Destroy;
+end;
+
+procedure TControlLoader.BuildScreen(AParent: TWinControl; AScreenName: string);
+begin
+  ShowMessage('BUilt');
+end;
+
+end.
