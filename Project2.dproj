@@ -47,7 +47,7 @@
 				<Form> Form4 </Form>
 			</DCCReference>
 			<DCCReference Include="AppController.pas"/>
-			<DCCReference Include="ControlLoader.pas"/>
+			<DCCReference Include="LayoutLoader.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

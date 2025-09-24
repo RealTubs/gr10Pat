@@ -4,7 +4,7 @@ uses
   Forms,
   Unit4 in 'Unit4.pas' { Form4 } ,
   AppController in 'AppController.pas',
-  ControlLoader in 'ControlLoader.pas';
+  LayoutLoader in 'LayoutLoader.pas';
 {$R *.res}
 
 begin
