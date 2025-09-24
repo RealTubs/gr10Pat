@@ -1,0 +1,55 @@
+{
+  "screens": {
+    "TestScreen": {
+      "controls": [
+        { "name": "lblQuestion", "type": "ctLabel", "properties": { "caption": "What is the capital of France?", "top": 20, "left": 20, "width": 460, "height": 20 } },
+        { "name": "edtAnswer", "type": "ctEdit", "properties": { "text": "", "top": 50, "left": 20, "width": 200, "height": 25 } },
+        { "name": "btnSubmit", "type": "ctButton", "properties": { "caption": "Submit", "top": 50, "left": 230, "width": 75, "height": 25 }, "action": "checkAnswer" },
+        { "name": "lblResult", "type": "ctLabel", "properties": { "caption": "", "top": 85, "left": 20, "width": 200, "height": 20, "visible": false, "font": { "color": "clGreen" } } }
+      ],
+      "canvas": {
+        "target": "dpnlCanvas",
+        "initObjects": [
+          { "id": "obj1", "type": "circle", "color": "clRed", "position": { "x": 400, "y": 150 }, "size": { "radius": 20 } },
+          { "id": "obj2", "type": "rectangle", "color": "clBlue", "position": { "x": 350, "y": 250 }, "size": { "width": 50, "height": 50 } }
+        ]
+      },
+      "events": {
+        "onCorrectAnswer": {
+          "execute": [
+            { "type": "updateProperty", "params": { "target": "lblResult", "property": "caption", "value": "Correct!" } },
+            { "type": "updateProperty", "params": { "target": "lblResult", "property": "visible", "value": true } },
+            { "type": "updateProperty", "params": { "target": "edtAnswer", "property": "enabled", "value": false } }
+          ]
+        },
+        "onIncorrectAnswer": {
+          "execute": [
+            { "type": "updateProperty", "params": { "target": "lblResult", "property": "caption", "value": "Try Again." } },
+            { "type": "updateProperty", "params": { "target": "lblResult", "property": "visible", "value": true } },
+            { "type": "updateProperty", "params": { "target": "lblResult", "property": "font.color", "value": "clRed" } }
+          ]
+        }
+      },
+      "handlers": [
+        {
+          "trigger": "checkAnswer",
+          "conditions": [
+            { "target": "edtAnswer", "property": "text", "operator": "equals", "value": "Paris" }
+          ],
+          "execute": [
+            { "type": "triggerEvent", "params": { "id": "onCorrectAnswer" } }
+          ]
+        },
+        {
+          "trigger": "checkAnswer",
+          "conditions": [
+            { "target": "edtAnswer", "property": "text", "operator": "notEquals", "value": "Paris" }
+          ],
+          "execute": [
+            { "type": "triggerEvent", "params": { "id": "onIncorrectAnswer" } }
+          ]
+        }
+      ]
+    }
+  }
+}

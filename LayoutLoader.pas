@@ -51,9 +51,9 @@ var
   Screen, ControlJSON, Screens, Properties: TlkJSONobject;
   ControlType: TControlType;
   ControlList: TlkJSONlist;
-  Control: TControl;
+  LControl: TControl;
 begin
-  Screens := FLayout.Field['Screens'] as TlkJSONobject;
+  Screens := FLayout.Field['screens'] as TlkJSONobject;
   Screen := Screens.Field[AScreenName] as TlkJSONobject;
   ControlList := Screen.Field['controls'] as TlkJSONlist;
 
@@ -61,15 +61,20 @@ begin
 
   for I := 0 to ControlList.Count - 1 do
   begin
-    ControlJSON := ControlJSON.Child[I] as TlkJSONobject;
+    ControlJSON := ControlList.Child[I] as TlkJSONobject;
     Properties := ControlJSON.Field['properties'] as TlkJSONobject;
     ControlType := getControlType(ControlJSON.getString('type'));
-    TForm4(AParent).createControl(ControlType, ControlJSON.getString('name'),
-      Properties.getString('Caption'), Properties.getInt('width'),
-      Properties.getInt('height'), Properties.getInt('top'),
-      Properties.getInt('left'));
+    LControl := TForm4(AParent).createControl(ControlType,
+      ControlJSON.getString('name'), Properties.getString('caption'),
+      Properties.getInt('width'), Properties.getInt('height'),
+      Properties.getInt('left'), Properties.getInt('top'));
+    if (Properties.Field['align'] <> nil) and
+      (Properties.getString('alClient') = 'alClient') then
+      TImage(LControl).Align := alClient;
+
+    if ControlJSON.Field['actions'] <> nil then
+      LControl.Hint := Properties.getString('actions');
   end;
-  ShowMessage('BUilt');
 end;
 
 end.

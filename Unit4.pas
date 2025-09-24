@@ -51,7 +51,10 @@ var
 begin
   case AControlType of
     ctButton:
-      LControl := TButton.Create(self);
+      begin
+        LControl := TButton.Create(self);
+        TButton(LControl).OnClick := ControlAction;
+      end;
     ctLabel:
       LControl := TLabel.Create(self);
     ctEdit:
