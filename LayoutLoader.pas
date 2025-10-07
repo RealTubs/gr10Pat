@@ -56,6 +56,7 @@ begin
   Screens := FLayout.Field['screens'] as TlkJSONobject;
   Screen := Screens.Field[AScreenName] as TlkJSONobject;
   ControlList := Screen.Field['controls'] as TlkJSONlist;
+  FController.LoadScreenLogic(Screen);
 
   TForm4(AParent).clearScreen;
 
@@ -72,8 +73,8 @@ begin
       (Properties.getString('alClient') = 'alClient') then
       TImage(LControl).Align := alClient;
 
-    if ControlJSON.Field['actions'] <> nil then
-      LControl.Hint := Properties.getString('actions');
+    if ControlJSON.Field['action'] <> nil then
+      LControl.Hint := ControlJSON.getString('action');
   end;
 end;
 

@@ -30,7 +30,7 @@ var
 
 procedure TForm4.ControlAction(Sender: TObject);
 begin
-  // FAppController.HandleControlAction(Sender);
+  FAppController.HandleControlAction(Sender);
 end;
 
 procedure TForm4.clearScreen;
@@ -78,7 +78,6 @@ end;
 
 procedure TForm4.FormCreate(Sender: TObject);
 begin
-  ShowMessage('Hello world');
   FAppController := TAppCOntroller.Create(self);
 end;
 {$R *.dfm}

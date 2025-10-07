@@ -1,55 +1,241 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "screens": {
-    "TestScreen": {
+    "HomeScreen": {
       "controls": [
-        { "name": "lblQuestion", "type": "ctLabel", "properties": { "caption": "What is the capital of France?", "top": 20, "left": 20, "width": 460, "height": 20 } },
-        { "name": "edtAnswer", "type": "ctEdit", "properties": { "text": "", "top": 50, "left": 20, "width": 200, "height": 25 } },
-        { "name": "btnSubmit", "type": "ctButton", "properties": { "caption": "Submit", "top": 50, "left": 230, "width": 75, "height": 25 }, "action": "checkAnswer" },
-        { "name": "lblResult", "type": "ctLabel", "properties": { "caption": "", "top": 85, "left": 20, "width": 200, "height": 20, "visible": false, "font": { "color": "clGreen" } } }
-      ],
-      "canvas": {
-        "target": "dpnlCanvas",
-        "initObjects": [
-          { "id": "obj1", "type": "circle", "color": "clRed", "position": { "x": 400, "y": 150 }, "size": { "radius": 20 } },
-          { "id": "obj2", "type": "rectangle", "color": "clBlue", "position": { "x": 350, "y": 250 }, "size": { "width": 50, "height": 50 } }
-        ]
-      },
-      "events": {
-        "onCorrectAnswer": {
-          "execute": [
-            { "type": "updateProperty", "params": { "target": "lblResult", "property": "caption", "value": "Correct!" } },
-            { "type": "updateProperty", "params": { "target": "lblResult", "property": "visible", "value": true } },
-            { "type": "updateProperty", "params": { "target": "edtAnswer", "property": "enabled", "value": false } }
-          ]
+        {
+          "name": "lblHomeTitle",
+          "type": "ctLabel",
+          "properties": {
+            "caption": "Welcome to Testify App!",
+            "top": 50,
+            "left": 50,
+            "width": 300,
+            "height": 20,
+            "font": {
+              "color": "#0000FF"
+            }
+          }
         },
-        "onIncorrectAnswer": {
-          "execute": [
-            { "type": "updateProperty", "params": { "target": "lblResult", "property": "caption", "value": "Try Again." } },
-            { "type": "updateProperty", "params": { "target": "lblResult", "property": "visible", "value": true } },
-            { "type": "updateProperty", "params": { "target": "lblResult", "property": "font.color", "value": "clRed" } }
-          ]
+        {
+          "name": "btnGoDetails",
+          "type": "ctButton",
+          "properties": {
+            "caption": "Go to Details",
+            "top": 100,
+            "left": 50,
+            "width": 150,
+            "height": 30
+          },
+          "action": "OnDetailsClick"
+        },
+        {
+          "name": "btnGoSettings",
+          "type": "ctButton",
+          "properties": {
+            "caption": "Settings",
+            "top": 150,
+            "left": 50,
+            "width": 150,
+            "height": 30
+          },
+          "action": "OnSettingsClick"
         }
-      },
+      ],
       "handlers": [
         {
-          "trigger": "checkAnswer",
-          "conditions": [
-            { "target": "edtAnswer", "property": "text", "operator": "equals", "value": "Paris" }
-          ],
+          "trigger": "OnDetailsClick",
+          "conditions": [],
           "execute": [
-            { "type": "triggerEvent", "params": { "id": "onCorrectAnswer" } }
+            {
+              "type": "navigate",
+              "params": {
+                "screen": "DetailScreen"
+              }
+            }
           ]
         },
         {
-          "trigger": "checkAnswer",
-          "conditions": [
-            { "target": "edtAnswer", "property": "text", "operator": "notEquals", "value": "Paris" }
-          ],
+          "trigger": "OnSettingsClick",
+          "conditions": [],
           "execute": [
-            { "type": "triggerEvent", "params": { "id": "onIncorrectAnswer" } }
+            {
+              "type": "navigate",
+              "params": {
+                "screen": "SettingsScreen"
+              }
+            }
           ]
         }
-      ]
+      ],
+      "events": {
+        "onLoad": {
+          "execute": []
+        }
+      },
+      "canvas": {
+        "target": "mainCanvas",
+        "initObjects": []
+      }
+    },
+    "DetailScreen": {
+      "controls": [
+        {
+          "name": "lblDetailTitle",
+          "type": "ctLabel",
+          "properties": {
+            "caption": "Product Details",
+            "top": 50,
+            "left": 50,
+            "width": 300,
+            "height": 20,
+            "font": {
+              "color": "#FF0000"
+            }
+          }
+        },
+        {
+          "name": "btnBackHome",
+          "type": "ctButton",
+          "properties": {
+            "caption": "Back to Home",
+            "top": 100,
+            "left": 50,
+            "width": 150,
+            "height": 30
+          },
+          "action": "OnBackHomeClick"
+        }
+      ],
+      "handlers": [
+        {
+          "trigger": "OnBackHomeClick",
+          "conditions": [],
+          "execute": [
+            {
+              "type": "navigate",
+              "params": {
+                "screen": "HomeScreen"
+              }
+            }
+          ]
+        }
+      ],
+      "events": {
+        "onLoad": {
+          "execute": []
+        }
+      },
+      "canvas": {
+        "target": "detailCanvas",
+        "initObjects": []
+      }
+    },
+    "SettingsScreen": {
+      "controls": [
+        {
+          "name": "lblSettingsTitle",
+          "type": "ctLabel",
+          "properties": {
+            "caption": "Application Settings",
+            "top": 50,
+            "left": 50,
+            "width": 300,
+            "height": 20,
+            "font": {
+              "color": "#008000"
+            }
+          }
+        },
+        {
+          "name": "btnConfirm",
+          "type": "ctButton",
+          "properties": {
+            "caption": "Save and Confirm",
+            "top": 100,
+            "left": 50,
+            "width": 150,
+            "height": 30
+          },
+          "action": "OnConfirmClick"
+        }
+      ],
+      "handlers": [
+        {
+          "trigger": "OnConfirmClick",
+          "conditions": [],
+          "execute": [
+            {
+              "type": "navigate",
+              "params": {
+                "screen": "ConfirmationScreen"
+              }
+            }
+          ]
+        }
+      ],
+      "events": {
+        "onLoad": {
+          "execute": []
+        }
+      },
+      "canvas": {
+        "target": "settingsCanvas",
+        "initObjects": []
+      }
+    },
+    "ConfirmationScreen": {
+      "controls": [
+        {
+          "name": "lblConfirmation",
+          "type": "ctLabel",
+          "properties": {
+            "caption": "Settings Saved Successfully!",
+            "top": 50,
+            "left": 50,
+            "width": 300,
+            "height": 20,
+            "font": {
+              "color": "#800080"
+            }
+          }
+        },
+        {
+          "name": "btnReturnHome",
+          "type": "ctButton",
+          "properties": {
+            "caption": "Return to Home",
+            "top": 100,
+            "left": 50,
+            "width": 150,
+            "height": 30
+          },
+          "action": "OnReturnHome"
+        }
+      ],
+      "handlers": [
+        {
+          "trigger": "OnReturnHome",
+          "conditions": [],
+          "execute": [
+            {
+              "type": "navigate",
+              "params": {
+                "screen": "HomeScreen"
+              }
+            }
+          ]
+        }
+      ],
+      "events": {
+        "onLoad": {
+          "execute": []
+        }
+      },
+      "canvas": {
+        "target": "confirmCanvas",
+        "initObjects": []
+      }
     }
   }
 }

@@ -1,0 +1,353 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Application UI Definition",
+  "description": "A schema for defining screens, controls, and logic for Testify(App).",
+  "type": "object",
+  "properties": {
+    "screens": {
+      "description": "A collection of all screens in the application.",
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": {
+          "$ref": "#/$defs/screen"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "screens"
+  ],
+  "$defs": {
+    "screen": {
+      "type": "object",
+      "properties": {
+        "controls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/control"
+          }
+        },
+        "handlers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/handler"
+          }
+        },
+        "events": {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_]+$": {
+              "$ref": "#/$defs/event"
+            }
+          },
+          "additionalProperties": false
+        },
+        "canvas": {
+          "$ref": "#/$defs/canvas"
+        }
+      },
+      "required": [
+        "controls",
+        "handlers",
+        "events",
+        "canvas"
+      ]
+    },
+    "control": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "ctLabel",
+            "ctEdit",
+            "ctButton"
+          ]
+        },
+        "properties": {
+          "$ref": "#/$defs/controlProperties"
+        },
+        "action": {
+          "type": "string",
+          "description": "The name of the trigger this control fires."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "properties"
+      ]
+    },
+    "controlProperties": {
+      "type": "object",
+      "properties": {
+        "caption": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "top": {
+          "type": "integer"
+        },
+        "left": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "font": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "color"
+          ]
+        }
+      }
+    },
+    "handler": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        },
+        "execute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        }
+      },
+      "required": [
+        "trigger",
+        "conditions",
+        "execute"
+      ]
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "property": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "equals",
+            "notEquals"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        }
+      },
+      "required": [
+        "target",
+        "property",
+        "operator",
+        "value"
+      ]
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "updateProperty",
+            "triggerEvent",
+            "navigate"
+          ]
+        },
+        "params": {
+          "$ref": "#/$defs/actionParams"
+        }
+      },
+      "required": [
+        "type",
+        "params"
+      ]
+    },
+    "actionParams": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "target": {
+              "type": "string"
+            },
+            "property": {
+              "type": "string"
+            },
+            "value": {
+              "type": [
+                "string",
+                "number",
+                "boolean"
+              ]
+            }
+          },
+          "required": [
+            "target",
+            "property",
+            "value"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "events"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "screen": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "screen"
+          ]
+        }
+      ]
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "execute": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        }
+      },
+      "required": [
+        "execute"
+      ]
+    },
+    "canvas": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "initObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/canvasObject"
+          }
+        }
+      },
+      "required": [
+        "target",
+        "initObjects"
+      ]
+    },
+    "canvasObject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "circle",
+            "rectangle"
+          ]
+        },
+        "color": {
+          "type": "string"
+        },
+        "position": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ]
+        },
+        "size": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "radius": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "radius"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "width",
+                "height"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "color",
+        "position",
+        "size"
+      ]
+    }
+  }
+}
