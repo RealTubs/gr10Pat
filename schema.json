@@ -264,8 +264,8 @@
     "canvas": {
       "type": "object",
       "properties": {
-        "target": {
-          "type": "string"
+        "enabled": {
+          "type": "boolean"
         },
         "initObjects": {
           "type": "array",
@@ -275,7 +275,7 @@
         }
       },
       "required": [
-        "target",
+        "enabled",
         "initObjects"
       ]
     },

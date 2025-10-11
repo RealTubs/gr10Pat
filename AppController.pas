@@ -4,18 +4,19 @@ interface
 
 uses
   SysUtils, Classes, Forms, Unit4, uLkJSON, Dialogs, Controls, Variants,
-  StdCtrls;
+  StdCtrls, CanvasEngine;
 
 type
-  // TAppEngine = class 
-  // procedure MainLoop(Sender: TObject); 
-  // 
-  // constructor Create; 
-  // end; 
+  // TAppEngine = class
+  // procedure MainLoop(Sender: TObject);
+  //
+  // constructor Create;
+  // end;
 
   TAppController = class
   private
     FMainForm: TForm4;
+    FCanvasEngine: TCanvasEngine;
     FScreenLogic: TlkJSONobject;
 
   public
@@ -26,7 +27,7 @@ type
     procedure triggerEvent(AEvent: string);
     function CheckCondition(ACondition: TlkJSONobject): Boolean;
     constructor Create(MainForm: TForm4);
-    // destructor Destroy; override; 
+    // destructor Destroy; override;
   end;
 
 implementation
@@ -43,9 +44,10 @@ var
 begin
   inherited Create;
   FMainForm := MainForm;
-  // Application.OnIdle := Mainloop 
+  // Application.OnIdle := Mainloop
   LStringList := TStringList.Create;
   LStringList.LoadFromFile('test2.json');
+  FCanvasEngine := TCanvasEngine.Create;
   LayoutLoader := TLayoutLoader.Create(TlkJSon.ParseText(LStringList.text)
       as TlkJSONobject, self);
   LayoutLoader.BuildScreen(FMainForm, 'HomeScreen');
@@ -175,8 +177,17 @@ begin
 end;
 
 procedure TAppController.LoadScreenLogic(AScreenLogic: TlkJSONobject);
+var
+  Canvas: TlkJSONobject;
 begin
+  FCanvasEngine.Disable;
   FScreenLogic := AScreenLogic;
+  Canvas := FScreenLogic.Field['canvas'] as TlkJSONobject;
+  if Canvas.getBoolean('enabled') then
+  begin
+    FCanvasEngine.loadCanvasData(Canvas);
+    FCanvasEngine.Enable
+  end;
 end;
 
 end.

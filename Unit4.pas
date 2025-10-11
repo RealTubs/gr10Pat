@@ -39,7 +39,8 @@ var
 begin
   for I := ControlCount - 1 downto 0 do
   begin
-    Controls[I].Free;
+    if Controls[I].Name <> 'imgCanvas' then
+      Controls[I].Free;
   end;
 end;
 

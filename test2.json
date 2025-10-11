@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "./schema.json",
   "screens": {
     "HomeScreen": {
       "controls": [
@@ -74,8 +74,23 @@
         }
       },
       "canvas": {
-        "target": "mainCanvas",
-        "initObjects": []
+        "enabled": true,
+        "initObjects": [
+          {
+            "id": "grass",
+            "type": "rectangle",
+            "color": "#00FF00",
+            "position": {"x": 0, "y": 150},
+            "size": {"width": 800, "height": 200}
+          },
+           {
+            "id": "sky",
+            "type": "rectangle",
+            "color": "#000FF",
+            "position": {"x": 0, "y": 0},
+            "size": {"width": 800, "height": 150}
+          }
+        ]
       }
     },
     "DetailScreen": {
@@ -127,7 +142,7 @@
         }
       },
       "canvas": {
-        "target": "detailCanvas",
+        "enabled": true,
         "initObjects": []
       }
     },
@@ -180,7 +195,7 @@
         }
       },
       "canvas": {
-        "target": "settingsCanvas",
+        "enabled": true,
         "initObjects": []
       }
     },
@@ -233,7 +248,7 @@
         }
       },
       "canvas": {
-        "target": "confirmCanvas",
+        "enabled": true,
         "initObjects": []
       }
     }

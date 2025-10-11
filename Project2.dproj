@@ -48,6 +48,14 @@
 			</DCCReference>
 			<DCCReference Include="AppController.pas"/>
 			<DCCReference Include="LayoutLoader.pas"/>
+			<DCCReference Include="CanvasEngine.pas"/>
+			<None Include="ModelSupport_Project2\default.txaPackage"/>
+			<None Include="ModelSupport_Project2\default.txvpck"/>
+			<None Include="ModelSupport_Project2\AppController\default.txvpck"/>
+			<None Include="ModelSupport_Project2\Project2\default.txvpck"/>
+			<None Include="ModelSupport_Project2\CanvasEngine\default.txvpck"/>
+			<None Include="ModelSupport_Project2\LayoutLoader\default.txvpck"/>
+			<None Include="ModelSupport_Project2\Unit4\default.txvpck"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
@@ -102,6 +110,7 @@
 						<Source Name="MainSource">Project2.dpr</Source>
 					</Source>
 				</Delphi.Personality>
+				<ModelSupport>True</ModelSupport>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>

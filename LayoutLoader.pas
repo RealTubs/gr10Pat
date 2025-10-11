@@ -7,7 +7,6 @@ uses
   StdCtrls, ExtCtrls, Messages, Dialogs, Controls, Unit4;
 
 type
-  // TControlType = (ctButton, ctLabel, ctEdit);
 
   TLayoutLoader = class
   private

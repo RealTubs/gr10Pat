@@ -2,9 +2,11 @@ program Project2;
 
 uses
   Forms,
-  Unit4 in 'Unit4.pas' { Form4 } ,
+  Unit4 in 'Unit4.pas' { Form4 },
   AppController in 'AppController.pas',
-  LayoutLoader in 'LayoutLoader.pas';
+  LayoutLoader in 'LayoutLoader.pas',
+  CanvasEngine in 'CanvasEngine.pas';
+
 {$R *.res}
 
 begin
