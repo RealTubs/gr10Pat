@@ -77,18 +77,55 @@
         "enabled": true,
         "initObjects": [
           {
+            "id": "sun",
+            "type": "circle",
+            "color": "#FFFF00",
+            "position": {
+              "x": 300,
+              "y": 50
+            },
+            "size": {
+              "radius": 40
+            }
+          },
+          {
+            "id": "player",
+            "type": "rectangle",
+            "color": "#FF0000",
+            "position": {
+              "x": 300,
+              "y": 100
+            },
+            "size": {
+              "width": 200,
+              "height": 150
+            }
+          },
+          {
             "id": "grass",
             "type": "rectangle",
             "color": "#00FF00",
-            "position": {"x": 0, "y": 150},
-            "size": {"width": 800, "height": 200}
+            "position": {
+              "x": 0,
+              "y": 150
+            },
+            "size": {
+              "width": 800,
+              "height": 200
+            }
           },
-           {
+          {
             "id": "sky",
             "type": "rectangle",
             "color": "#000FF",
-            "position": {"x": 0, "y": 0},
-            "size": {"width": 800, "height": 150}
+            "position": {
+              "x": 0,
+              "y": 0
+            },
+            "size": {
+              "width": 800,
+              "height": 150
+            }
           }
         ]
       }
@@ -142,7 +179,7 @@
         }
       },
       "canvas": {
-        "enabled": true,
+        "enabled": false,
         "initObjects": []
       }
     },

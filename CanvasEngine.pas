@@ -6,8 +6,11 @@ uses SysUtils, Classes, Forms, Unit4, uLkJSON, Dialogs, Controls, ExtCtrls,
   Windows, Graphics;
 
 type
-  TPosition = class
+  TVector = class
     x, y: Integer;
+  end;
+
+  TPosition = class(TVector)
     constructor Create(AJson: TlkJSONobject);
   end;
 
@@ -29,10 +32,12 @@ type
     fCanvasData: TlkJSONobject;
     fCanvasObjects: TList;
     fCanvas: TCanvas;
+    fImage: TImage;
   public
     procedure Enable;
     procedure Disable;
     procedure RenderCanvas;
+    procedure ClearCanvas;
     procedure loadCanvasData(ACanvasData: TlkJSONobject);
     procedure CanvasUpdate(Sender: Tobject; var Done: Boolean);
     constructor Create;
@@ -81,12 +86,19 @@ var
   I: Integer;
 begin
   fCanvasData := ACanvasData;
+  fCanvasObjects.Clear;
   initObjects := fCanvasData.Field['initObjects'] as TlkJSONlist;
   for I := 0 to initObjects.Count - 1 do
   begin
     initObject := initObjects.Child[I] as TlkJSONobject;
     fCanvasObjects.Add(TCanvasObject.Create(initObject));
   end;
+end;
+
+procedure TCanvasEngine.ClearCanvas;
+begin
+  fCanvas.Brush.Color := MainForm.Color;
+  fCanvas.FillRect(fImage.ClientRect);
 end;
 
 procedure TCanvasEngine.RenderCanvas;
@@ -108,15 +120,13 @@ begin
 end;
 
 constructor TCanvasEngine.Create;
-var
-  LImage: TImage;
 begin
   fCanvasObjects := TList.Create;
-  LImage := TImage.Create(MainForm);
-  LImage.Parent := MainForm;
-  LImage.Align := alClient;
-  LImage.Name := 'imgCanvas';
-  fCanvas := LImage.Canvas;
+  fImage := TImage.Create(MainForm);
+  fImage.Parent := MainForm;
+  fImage.Align := alClient;
+  fImage.Name := 'imgCanvas';
+  fCanvas := fImage.Canvas;
 end;
 
 procedure TCanvasEngine.Enable;
@@ -129,6 +139,7 @@ end;
 procedure TCanvasEngine.Disable;
 begin
   Application.OnIdle := nil;
+  ClearCanvas;
 end;
 
 procedure TCanvasEngine.CanvasUpdate(Sender: Tobject; var Done: Boolean);
@@ -139,6 +150,8 @@ begin
   CurrentTime := GetTickCount;
   DeltaTime := (fPrevTime - CurrentTime) / 1000;
   fPrevTime := CurrentTime;
+  // ClearCanvas;
+  // RenderCanvas;
 end;
 
 end.

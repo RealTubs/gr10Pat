@@ -7,11 +7,6 @@ uses
   StdCtrls, CanvasEngine;
 
 type
-  // TAppEngine = class
-  // procedure MainLoop(Sender: TObject);
-  //
-  // constructor Create;
-  // end;
 
   TAppController = class
   private
@@ -44,7 +39,6 @@ var
 begin
   inherited Create;
   FMainForm := MainForm;
-  // Application.OnIdle := Mainloop
   LStringList := TStringList.Create;
   LStringList.LoadFromFile('test2.json');
   FCanvasEngine := TCanvasEngine.Create;

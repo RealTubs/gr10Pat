@@ -21,6 +21,18 @@ type
 
 implementation
 
+function RGBtoColor(RGBstring: string): TColor;
+var
+  HexValue: Integer;
+  R, G, B: Byte;
+begin
+  HexValue := StrToInt('$' + copy(RGBstring, 2, 6));
+  R := (HexValue shr 16) and $FF;
+  G := (HexValue shr 8) and $FF;
+  B := HexValue and $FF;
+  Result := RGB(R, G, B);
+end;
+
 constructor TLayoutLoader.Create(Json: TlkJSONobject;
   AController: TAppController);
 begin
@@ -46,7 +58,7 @@ end;
 
 procedure TLayoutLoader.BuildScreen(AParent: TWinControl; AScreenName: string);
 var
-  I: integer;
+  I: Integer;
   Screen, ControlJSON, Screens, Properties: TlkJSONobject;
   ControlType: TControlType;
   ControlList: TlkJSONlist;
@@ -71,6 +83,10 @@ begin
     if (Properties.Field['align'] <> nil) and
       (Properties.getString('alClient') = 'alClient') then
       TImage(LControl).Align := alClient;
+
+    if ControlJSON.Field['font'] <> nil then
+      TLabel(LControl).font.Color := RGBtoColor
+        (TlkJSONobject(ControlJSON.Field['font']).getString('color'));
 
     if ControlJSON.Field['action'] <> nil then
       LControl.Hint := ControlJSON.getString('action');

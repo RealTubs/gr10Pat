@@ -1,0 +1,13 @@
+[General]
+Name=Project2
+BaseDir=C:\Users\ntsak\OneDrive\Dev\project\Pat\
+Project=1
+[Classes]
+Count=7
+Class0="TForm4","TForm","Unit4","11","C:\Users\ntsak\OneDrive\Dev\project\Pat\Unit4.pas"
+Class1="TAppController","","AppController","10","C:\Users\ntsak\OneDrive\Dev\project\Pat\AppController.pas"
+Class2="TLayoutLoader","","LayoutLoader","10","C:\Users\ntsak\OneDrive\Dev\project\Pat\LayoutLoader.pas"
+Class3="TVector","","CanvasEngine","8","C:\Users\ntsak\OneDrive\Dev\project\Pat\CanvasEngine.pas"
+Class4="TPosition","TVector","CanvasEngine","0","C:\Users\ntsak\OneDrive\Dev\project\Pat\CanvasEngine.pas"
+Class5="TCanvasObject","","CanvasEngine","20","C:\Users\ntsak\OneDrive\Dev\project\Pat\CanvasEngine.pas"
+Class6="TCanvasEngine","","CanvasEngine","28","C:\Users\ntsak\OneDrive\Dev\project\Pat\CanvasEngine.pas"
